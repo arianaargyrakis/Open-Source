@@ -2500,11 +2500,19 @@ void CMenus::RenderSettingsAppearance(CUIRect MainView)
 		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowhud, Localize("Show ingame HUD"), &g_Config.m_ClShowhud, &Section, LineSize);
 
 		// Switches of the various normal HUD elements
-		LeftView.HSplitTop(SectionTotalMargin + 3 * LineSize, &Section, &LeftView);
+		LeftView.HSplitTop(SectionTotalMargin + LineSize, &Section, &LeftView);
 		Section.Margin(SectionMargin, &Section);
 
 		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowhudHealthAmmo, Localize("Show health, shields and ammo"), &g_Config.m_ClShowhudHealthAmmo, &Section, LineSize);
+
+		LeftView.HSplitTop(SectionTotalMargin + LineSize, &Section, &LeftView);
+		Section.Margin(SectionMargin, &Section);
+
 		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowhudScore, Localize("Show score"), &g_Config.m_ClShowhudScore, &Section, LineSize);
+
+		LeftView.HSplitTop(SectionTotalMargin + LineSize, &Section, &LeftView);
+		Section.Margin(SectionMargin, &Section);
+
 		DoButton_CheckBoxAutoVMarginAndSet(&g_Config.m_ClShowLocalTimeAlways, Localize("Show local time always"), &g_Config.m_ClShowLocalTimeAlways, &Section, LineSize);
 
 		// Settings of the HUD element for votes
@@ -2958,6 +2966,7 @@ void CMenus::RenderSettingsAppearance(CUIRect MainView)
 			g_Config.m_ClShowDirection = g_Config.m_ClShowDirection ^ 3;
 		}
 
+		Section.HSplitTop(LineSize, &Button, &Section);
 		ColorRGBA GreenDefault(0.78f, 1.0f, 0.8f, 1.0f);
 		static CButtonContainer s_AuthedColor, s_SameClanColor;
 		DoLine_ColorPicker(&s_AuthedColor, ColorPickerLineSize, ColorPickerLabelSize, ColorPickerLineSpacing, &Section, Localize("Authed name color in scoreboard"), &g_Config.m_ClAuthedPlayerColor, GreenDefault, false);
@@ -2972,7 +2981,7 @@ void CMenus::RenderSettingsAppearance(CUIRect MainView)
 		UI()->DoLabel(&Label, Localize("Hook collision line"), HeadlineFontSize, TEXTALIGN_ML);
 
 		// General hookline settings
-		LeftView.HSplitTop(SectionTotalMargin + 6 * LineSize + 3 * ColorPickerLineSize, &Section, &LeftView);
+		LeftView.HSplitTop(SectionTotalMargin + 1.5 * LineSize, &Section, &LeftView);
 		Section.Margin(SectionMargin, &Section);
 
 		Section.HSplitTop(LineSize, &Button, &Section);
@@ -2981,6 +2990,8 @@ void CMenus::RenderSettingsAppearance(CUIRect MainView)
 			g_Config.m_ClShowHookCollOther = g_Config.m_ClShowHookCollOther >= 1 ? 0 : 1;
 		}
 
+		LeftView.HSplitTop(SectionTotalMargin + LineSize + 3 * ColorPickerLineSize, &Section, &LeftView);
+		Section.Margin(SectionMargin, &Section);
 		Section.HSplitTop(2 * LineSize, &Button, &Section);
 		UI()->DoScrollbarOption(&g_Config.m_ClHookCollSize, &g_Config.m_ClHookCollSize, &Button, Localize("Hook collision line width"), 0, 20, &CUI::ms_LinearScrollbarScale, CUI::SCROLLBAR_OPTION_MULTILINE);
 
@@ -2990,6 +3001,8 @@ void CMenus::RenderSettingsAppearance(CUIRect MainView)
 		static CButtonContainer s_HookCollNoCollResetID, s_HookCollHookableCollResetID, s_HookCollTeeCollResetID;
 		static int s_HookCollToolTip;
 
+		LeftView.HSplitTop(SectionTotalMargin + LineSize + 3 * ColorPickerLineSize, &Section, &LeftView);
+		Section.Margin(SectionMargin, &Section);
 		Section.HSplitTop(LineSize, &Label, &Section);
 		UI()->DoLabel(&Label, Localize("Colors of the hook collision line, in case of a possible collision with:"), 13.0f, TEXTALIGN_ML);
 		UI()->DoButtonLogic(&s_HookCollToolTip, 0, &Label); // Just for the tooltip, result ignored
